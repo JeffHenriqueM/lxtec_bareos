@@ -196,20 +196,20 @@ describe('9Oficio_contabo', () => {
 
     cy.writeFile('cypress/fixtures/' + '9OficioContabo_' + dataAtual + '.json', dados)
 
-/*Gambiarra, ler todos os arquivos e criar um novo
-    var array = []
-    cy.fixture('9oficio_06_12_2023').then((json1) => {
-      for(var i in json1)
-      console.clear()
-      console.log(json1[i])
-          array.push([i, json1[i]]);
-      cy.fixture('9OficioContabo_06_12_2023').then((json2) => {
-        for(var i in json2)
-          array.push([i, json2[i]]);
-      })
-    console.log(array)
-    })
-    cy.writeFile('cypress/fixtures/' + 'ultimo.json', array)*/
+    /*Gambiarra, ler todos os arquivos e criar um novo
+        var array = []
+        cy.fixture('9oficio_06_12_2023').then((json1) => {
+          for(var i in json1)
+          console.clear()
+          console.log(json1[i])
+              array.push([i, json1[i]]);
+          cy.fixture('9OficioContabo_06_12_2023').then((json2) => {
+            for(var i in json2)
+              array.push([i, json2[i]]);
+          })
+        console.log(array)
+        })
+        cy.writeFile('cypress/fixtures/' + 'ultimo.json', array)*/
   })
 
 
@@ -557,7 +557,7 @@ describe('Discautol', () => {
 
     pegarDados('job_srvcrdts03')
   })
-  
+
   it('job_sfad0102', () => {
     cy.visit('http://179.185.91.250:53080/bareos-webui/')
     cy.get('input[name="consolename"]').type('admin')
@@ -931,6 +931,7 @@ describe('Hospital_dos_Olhos_Dourados', () => {
     })
   }
 })
+
 describe('Lxtec_(Data_Center)', () => {
   var dados = []
   var bkpFull = {}
@@ -1004,7 +1005,6 @@ describe('Lxtec_(Data_Center)', () => {
 
     pegarDados('job_svpmppora01_dtc')
 
-  })
   })
   it('job_vitoriamtzad', () => {
     cy.visit('http://172.16.0.11/bareos-webui/')
@@ -1104,6 +1104,7 @@ describe('Lxtec_(Data_Center)', () => {
     pegarDados('job_srvdb_carbodo')
 
   })
+
   it('RestoreFiles', () => {
     cy.visit('http://172.16.0.11/bareos-webui/')
     cy.get('input[name="consolename"]').type('admin')
@@ -1134,7 +1135,6 @@ describe('Lxtec_(Data_Center)', () => {
 
   })
 
-
   it('backup-bareos-fd', () => {
     cy.visit('http://172.16.0.11/bareos-webui/')
     cy.get('input[name="consolename"]').type('admin')
@@ -1152,10 +1152,290 @@ describe('Lxtec_(Data_Center)', () => {
 
     cy.writeFile('cypress/fixtures/' + 'Lxtec_Data_Center' + dataAtual + '.json', dados)
   })
-
+  
   function pegarDados(name) {
     bkpFull = {}
     bkpFull.title = 'Lxtec_Data_Center' + name
+
+    //Pegar dados último Full
+    cy.get('[data-index="0"] > :nth-child(8)').then(function (e) {
+      const dataEnd = e.text()
+      cy.get('[data-index="0"] > :nth-child(13)').then(function (e) {
+        const success = e.text()
+        if (success == "Success") {
+          //Método responsável por verificar se não há nenhum erro
+          cy.get('[data-index="0"] > :nth-child(12)').then(function (e) {
+            const erros = Number(e.text())
+            bkpFull.errosFull = e.text();
+            if (erros == 0) {
+              cy.get('[data-index="0"] > :nth-child(2)').then(function (e) {
+                const id = e.text()
+                bkpFull.id = id
+              })
+              cy.get('[data-index="0"] > :nth-child(11)').then(function (e) {
+                const tamanhoArquivo = e.text()
+                bkpFull.tamanho = tamanhoArquivo
+              })
+              cy.get('[data-index="0"] > :nth-child(7)').then(function (e) {
+                const dataInicio = e.text()
+                bkpFull.dataInicio = dataInicio
+              })
+              cy.get('[data-index="0"] > :nth-child(8)').then(function (e) {
+                const dataFim = e.text()
+                bkpFull.dataFim = dataFim
+              })
+              bkpFull.full = true
+              bkpFull.notes = "OK"
+            } else {
+              bkpFull.full = false
+              bkpFull.notes = "Erros : " + erros
+            }
+          })
+        } else {
+          bkpFull.full = false
+          bkpFull.notes = success
+        }
+      })
+      dados.push(bkpFull)
+    })
+  }
+})
+
+describe('Lxtec (Contabo)', () => {
+  var dados = []
+  var bkpFull = {}
+
+  it('job_pminocencia_dtc', () => {
+    cy.visit('http://154.38.167.81/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://154.38.167.81/bareos-webui/job/index?jobname=job_pminocencia_dtc')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_pminocencia_dtc')
+
+  })
+
+  it('job_pmselviria01_dtc', () => {
+    cy.visit('http://154.38.167.81/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://154.38.167.81/bareos-webui/job/index?jobname=job_pmselviria01_dtc')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_pmselviria01_dtc')
+
+  })
+
+  it('job_pmaquidauana_dtc', () => {
+    cy.visit('http://154.38.167.81/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://154.38.167.81/bareos-webui/job/index?jobname=job_pmaquidauana_dtc')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_pmaquidauana_dtc')
+
+  })
+
+  it('job_pmanastacio_dtc', () => {
+    cy.visit('http://154.38.167.81/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://154.38.167.81/bareos-webui/job/index?jobname=job_pmanastacio_dtc')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_pmanastacio_dtc')
+
+  })
+
+  it('job_pmparanaibactrl', () => {
+    cy.visit('http://154.38.167.81/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://154.38.167.81/bareos-webui/job/index?jobname=job_pmparanaibactrl')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_pmparanaibactrl')
+
+  })
+
+  it('job_gecondb_dtc', () => {
+    cy.visit('http://154.38.167.81/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://154.38.167.81/bareos-webui/job/index?jobname=job_gecondb_dtc')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_gecondb_dtc')
+
+  })
+
+  it('job_svdck0106', () => {
+    cy.visit('http://154.38.167.81/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://154.38.167.81/bareos-webui/job/index?jobname=job_svdck0106')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_svdck0106')
+
+  })
+
+  it('job_pmchapadao_dtc', () => {
+    cy.visit('http://154.38.167.81/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://154.38.167.81/bareos-webui/job/index?jobname=job_pmchapadao_dtc')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_pmchapadao_dtc')
+
+  })
+  
+  it('job_pmsidrolandiactrl', () => {
+    cy.visit('http://154.38.167.81/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://154.38.167.81/bareos-webui/job/index?jobname=job_pmsidrolandiactrl')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_pmsidrolandiactrl')
+
+  })
+
+  it('job_pmitaporactrl', () => {
+    cy.visit('http://154.38.167.81/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://154.38.167.81/bareos-webui/job/index?jobname=job_pmitaporactrl')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_pmitaporactrl')
+
+  })
+
+  it('job_pmselviriactrl', () => {
+    cy.visit('http://154.38.167.81/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://154.38.167.81/bareos-webui/job/index?jobname=job_pmselviriactrl')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_pmselviriactrl')
+
+  })
+  
+  it('job_pmbataguassuctrl', () => {
+    cy.visit('http://154.38.167.81/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://154.38.167.81/bareos-webui/job/index?jobname=job_pmbataguassuctrl')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_pmbataguassuctrl')
+
+  })
+
+  it('job_pmamambaictrl', () => {
+    cy.visit('http://154.38.167.81/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://154.38.167.81/bareos-webui/job/index?jobname=job_pmamambaictrl')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_pmamambaictrl')
+
+  })
+
+  it('BackupCatalog', () => {
+    cy.visit('http://154.38.167.81/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://154.38.167.81/bareos-webui/job/index?jobname=BackupCatalog')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('BackupCatalog')
+
+  })
+
+  it('backup-bareos-fd', () => {
+    cy.visit('http://154.38.167.81/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://154.38.167.81/bareos-webui/job/index?jobname=backup-bareos-fd')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('backup-bareos-fd')
+    var dataAtual = new Date()
+    dataAtual = dataAtual.toLocaleDateString().replaceAll('/', '_')
+
+    cy.writeFile('cypress/fixtures/' + 'Lxtec_Contabo' + dataAtual + '.json', dados)
+  })
+
+  function pegarDados(name) {
+    bkpFull = {}
+    bkpFull.title = 'Lxtec_Contabo' + name
 
     //Pegar dados último Full
     cy.get('[data-index="0"] > :nth-child(8)').then(function (e) {
