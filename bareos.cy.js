@@ -1950,6 +1950,7 @@ describe('Prefeitura Municipal de Corumba', () => {
     pegarDados('job_ns4')
 
   })
+
   it('RestoreFiles', () => {
     cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/')
     cy.get('input[name="consolename"]').type('admin')
@@ -1980,7 +1981,6 @@ describe('Prefeitura Municipal de Corumba', () => {
 
   })
 
-
   it('BackupCatalog', () => {
     cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui')
     cy.get('input[name="consolename"]').type('admin')
@@ -2003,6 +2003,107 @@ describe('Prefeitura Municipal de Corumba', () => {
   function pegarDados(name) {
     bkpFull = {}
     bkpFull.title = 'Prefeitura_Municipal_de_Corumba_' + name
+
+    //Pegar dados último Full
+    cy.get('[data-index="0"] > :nth-child(8)').then(function (e) {
+      const dataEnd = e.text()
+      cy.get('[data-index="0"] > :nth-child(13)').then(function (e) {
+        const success = e.text()
+        if (success == "Success") {
+          //Método responsável por verificar se não há nenhum erro
+          cy.get('[data-index="0"] > :nth-child(12)').then(function (e) {
+            const erros = Number(e.text())
+            bkpFull.errosFull = e.text();
+            if (erros == 0) {
+              cy.get('[data-index="0"] > :nth-child(2)').then(function (e) {
+                const id = e.text()
+                bkpFull.id = id
+              })
+              cy.get('[data-index="0"] > :nth-child(11)').then(function (e) {
+                const tamanhoArquivo = e.text()
+                bkpFull.tamanho = tamanhoArquivo
+              })
+              cy.get('[data-index="0"] > :nth-child(7)').then(function (e) {
+                const dataInicio = e.text()
+                bkpFull.dataInicio = dataInicio
+              })
+              cy.get('[data-index="0"] > :nth-child(8)').then(function (e) {
+                const dataFim = e.text()
+                bkpFull.dataFim = dataFim
+              })
+              bkpFull.full = true
+              bkpFull.notes = "OK"
+            } else {
+              bkpFull.full = false
+              bkpFull.notes = "Erros : " + erros
+            }
+          })
+        } else {
+          bkpFull.full = false
+          bkpFull.notes = success
+        }
+      })
+      dados.push(bkpFull)
+    })
+  }
+})
+
+describe('Prefeitura Municipal de Ladario', () => {
+  var dados = []
+  var bkpFull = {}
+
+  it('job_sfad0102', () => {
+    cy.visit('http://186.211.159.202:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://186.211.159.202:53080/bareos-webui/job/index?jobname=job_sfad0102')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_sfad0102')
+
+  })
+  it('backup-bareos-fd', () => {
+    cy.visit('http://186.211.159.202:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://186.211.159.202:53080/bareos-webui/job/index?jobname=backup-bareos-fd')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('backup-bareos-fd')
+
+  })
+
+
+  it('BackupCatalog', () => {
+    cy.visit('http://186.211.159.202:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://186.211.159.202:53080/bareos-webui/job/index?jobname=BackupCatalog')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('BackupCatalog')
+    var dataAtual = new Date()
+    dataAtual = dataAtual.toLocaleDateString().replaceAll('/', '_')
+
+    cy.writeFile('cypress/fixtures/' + 'Prefeitura_Municipal_de_Ladario' + dataAtual + '.json', dados)
+
+  })
+
+  function pegarDados(name) {
+    bkpFull = {}
+    bkpFull.title = 'Prefeitura_Municipal_de_Ladario' + name
 
     //Pegar dados último Full
     cy.get('[data-index="0"] > :nth-child(8)').then(function (e) {
