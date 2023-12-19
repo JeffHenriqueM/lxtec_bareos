@@ -128,11 +128,11 @@ describe('9Oficio', () => {
   }
 })
 
-describe('9Oficio_contabo', () => {
+describe('9Oficio_contabo', () => { //
   var dados = []
   var bkpFull = {}
 
-  it('job_srvbd01', () => { //Domain Controller 01 -- dados[2]
+  it('job_srvbd01', () => { //Run = Full 1st Sat at 22:00
     cy.visit('http://154.53.53.33/bareos-webui/')
     cy.get('input[name="consolename"]').type('admin')
     cy.get('input[name="password"]').type('ViQUingue')
@@ -141,13 +141,14 @@ describe('9Oficio_contabo', () => {
     cy.visit('http://154.53.53.33/bareos-webui/job/index?jobname=job_srvbd01')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(3000)
 
     pegarDados('job_srvdc01')
 
   })
 
-  it('job_srvarqII', () => {
+  it('job_srvarqII', () => { //Run = Full 1st Sat at 21:00
     cy.visit('http://154.53.53.33/bareos-webui/')
     cy.get('input[name="consolename"]').type('admin')
     cy.get('input[name="password"]').type('ViQUingue')
@@ -156,6 +157,7 @@ describe('9Oficio_contabo', () => {
     cy.visit('http://154.53.53.33/bareos-webui/job/index?jobname=job_srvarq')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('job_srvarq')
@@ -264,7 +266,7 @@ describe('9Oficio_contabo', () => {
 
 })
 
-describe('ADAMES', () => {
+describe.only('ADAMES', () => {
   var dados = []
   var bkpFull = {}
 
@@ -298,7 +300,7 @@ describe('ADAMES', () => {
 
   })
 
-  it('job_srvad01', () => {
+  it('job_srvad01', () => { //  Run = Full 1st Sun at 19:00
     cy.visit('http://189.59.92.130:53080/bareos-webui/')
     cy.get('input[name="consolename"]').type('admin')
     cy.get('input[name="password"]').type('ViQUingue')
@@ -307,6 +309,7 @@ describe('ADAMES', () => {
     cy.visit('http://189.59.92.130:53080/bareos-webui/job/index?jobname=job_srvad01')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('job_srvad01')
@@ -1744,6 +1747,262 @@ describe('MKJ Assessoria Contabil', () => {
   function pegarDados(name) {
     bkpFull = {}
     bkpFull.title = 'MKJ_Assessoria_Contabil_' + name
+
+    //Pegar dados último Full
+    cy.get('[data-index="0"] > :nth-child(8)').then(function (e) {
+      const dataEnd = e.text()
+      cy.get('[data-index="0"] > :nth-child(13)').then(function (e) {
+        const success = e.text()
+        if (success == "Success") {
+          //Método responsável por verificar se não há nenhum erro
+          cy.get('[data-index="0"] > :nth-child(12)').then(function (e) {
+            const erros = Number(e.text())
+            bkpFull.errosFull = e.text();
+            if (erros == 0) {
+              cy.get('[data-index="0"] > :nth-child(2)').then(function (e) {
+                const id = e.text()
+                bkpFull.id = id
+              })
+              cy.get('[data-index="0"] > :nth-child(11)').then(function (e) {
+                const tamanhoArquivo = e.text()
+                bkpFull.tamanho = tamanhoArquivo
+              })
+              cy.get('[data-index="0"] > :nth-child(7)').then(function (e) {
+                const dataInicio = e.text()
+                bkpFull.dataInicio = dataInicio
+              })
+              cy.get('[data-index="0"] > :nth-child(8)').then(function (e) {
+                const dataFim = e.text()
+                bkpFull.dataFim = dataFim
+              })
+              bkpFull.full = true
+              bkpFull.notes = "OK"
+            } else {
+              bkpFull.full = false
+              bkpFull.notes = "Erros : " + erros
+            }
+          })
+        } else {
+          bkpFull.full = false
+          bkpFull.notes = success
+        }
+      })
+      dados.push(bkpFull)
+    })
+  }
+})
+
+describe('Prefeitura Municipal de Corumba', () => {
+  var dados = []
+  var bkpFull = {}
+
+  it('job_sciapp01', () => {
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/job/index?jobname=job_sciapp01')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_sciapp01')
+
+  })
+  it('job_sdbpmc01', () => {
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/job/index?jobname=job_sdbpmc01')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_sdbpmc01')
+
+  })
+  it('job_sdbpmc03', () => {
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/job/index?jobname=job_sdbpmc03')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_sdbpmc03')
+
+  })
+  it('job_sdbpmc04', () => {
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/job/index?jobname=job_sdbpmc04')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_sdbpmc04')
+
+  })
+  it('job_spxpmc02', () => {
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/job/index?jobname=job_spxpmc02')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_spxpmc02')
+
+  })
+  it('job_sdbpmc02', () => {
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/job/index?jobname=job_sdbpmc02')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_sdbpmc02')
+
+  })
+  it('job_srvsti01', () => {
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/job/index?jobname=job_srvsti01')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_srvsti01')
+
+  })
+  it('job_sarqpmc01', () => {
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/job/index?jobname=job_sarqpmc01')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_sarqpmc01')
+
+  })
+  it('job_sdbpmc05', () => {
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/job/index?jobname=job_sdbpmc05')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_sdbpmc05')
+
+  })
+  it('job_swbpmc05', () => {
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/job/index?jobname=job_swbpmc05')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_swbpmc05')
+
+  })
+  it('job_ns4', () => {
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/job/index?jobname=job_ns4')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_ns4')
+
+  })
+  it('RestoreFiles', () => {
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/job/index?jobname=RestoreFiles')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('RestoreFiles')
+
+  })
+
+  it('backup-bareos-fd', () => {
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/job/index?jobname=backup-bareos-fd')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('backup-bareos-fd')
+
+  })
+
+
+  it('BackupCatalog', () => {
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui /job/index?jobname=BackupCatalog')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('BackupCatalog')
+    var dataAtual = new Date()
+    dataAtual = dataAtual.toLocaleDateString().replaceAll('/', '_')
+
+    cy.writeFile('cypress/fixtures/' + 'Prefeitura_Municipal_de_Corumba_' + dataAtual + '.json', dados)
+
+  })
+
+  function pegarDados(name) {
+    bkpFull = {}
+    bkpFull.title = 'Prefeitura_Municipal_de_Corumba_' + name
 
     //Pegar dados último Full
     cy.get('[data-index="0"] > :nth-child(8)').then(function (e) {
