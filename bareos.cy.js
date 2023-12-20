@@ -266,7 +266,7 @@ describe('9Oficio_contabo', () => { //
 
 })
 
-describe.only('ADAMES', () => {
+describe('ADAMES', () => {
   var dados = []
   var bkpFull = {}
 
@@ -850,6 +850,7 @@ describe('Hospital_dos_Olhos_Dourados', () => {
     cy.visit('http://170.254.139.33:53080/bareos-webui/job/index?jobname=job_sdbhod01')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('job_sdbhod01')
@@ -864,6 +865,7 @@ describe('Hospital_dos_Olhos_Dourados', () => {
     cy.visit('http://170.254.139.33:53080/bareos-webui/job/index?jobname=job_est-oct-01')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('job_est-oct-01')
@@ -900,6 +902,7 @@ describe('Hospital_dos_Olhos_Dourados', () => {
     cy.visit('http://170.254.139.33:53080/bareos-webui/job/index?jobname=backup-bareos-fd')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('backup-bareos-fd')
@@ -1079,6 +1082,7 @@ describe('Lxtec_(Data_Center)', () => {
     cy.visit('http://172.16.0.11/bareos-webui/job/index?jobname=job_svpmaquidauana01_dtc')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('job_svpmaquidauana01_dtc')
@@ -1093,6 +1097,7 @@ describe('Lxtec_(Data_Center)', () => {
     cy.visit('http://172.16.0.11/bareos-webui/job/index?jobname=Consolidate')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('Consolidate')
@@ -1107,6 +1112,7 @@ describe('Lxtec_(Data_Center)', () => {
     cy.visit('http://172.16.0.11/bareos-webui/job/index?jobname=job_srvdb_carmju')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('job_srvdb_carmju')
@@ -1121,6 +1127,7 @@ describe('Lxtec_(Data_Center)', () => {
     cy.visit('http://172.16.0.11/bareos-webui/job/index?jobname=job_srvdb_carbodo')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('job_srvdb_carbodo')
@@ -1152,6 +1159,7 @@ describe('Lxtec_(Data_Center)', () => {
     cy.visit('http://172.16.0.11/bareos-webui/job/index?jobname=backup-bareos-fd')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('backup-bareos-fd')
@@ -1568,6 +1576,7 @@ describe('Lxtec (Contabo)', () => {
     cy.visit('http://173.249.27.152/bareos-webui/job/index?jobname=Consolidate')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('Consolidate')
@@ -1599,6 +1608,7 @@ describe('Lxtec (Contabo)', () => {
     cy.visit('http://173.249.27.152/bareos-webui/job/index?jobname=backup-bareos-fd')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('backup-bareos-fd')
@@ -1689,6 +1699,7 @@ describe('MKJ Assessoria Contabil', () => {
     cy.visit('http://179.95.236.242:53080/bareos-webui/job/index?jobname=job_srvmkj-fd')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('job_srvmkj-fd')
@@ -1703,6 +1714,7 @@ describe('MKJ Assessoria Contabil', () => {
     cy.visit('http://179.95.236.242:53080/bareos-webui/job/index?jobname=job_sfarq0111-fd')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('job_sfarq0111-fd')
@@ -1718,6 +1730,7 @@ describe('MKJ Assessoria Contabil', () => {
     cy.visit('http://179.95.236.242:53080/bareos-webui/job/index?jobname=backup-bareos-fd')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('backup-bareos-fd')
@@ -2176,6 +2189,7 @@ describe('Prefeitura Municipal Pedro Gomes ', () => {
     cy.visit('http://45.6.108.122:58003/bareos-webui/job/index?jobname=backup-bareos-fd')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('backup-bareos-fd')
@@ -2250,3 +2264,610 @@ describe('Prefeitura Municipal Pedro Gomes ', () => {
   }
 })
 
+describe('Real H - Diario', () => {
+  var dados = []
+  var bkpFull = {}
+
+  it('job_gestor', () => {
+    cy.visit('http://186.215.87.174:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://186.215.87.174:53080/bareos-webui/job/index?jobname=job_gestor')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_gestor')
+  })
+
+  it('job_srvappalbatroz', () => {
+    cy.visit('http://186.215.87.174:53080/bareos-webui')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://186.215.87.174:53080/bareos-webui/job/index?jobname=job_srvappalbatroz')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_srvappalbatroz')
+  })
+
+  it('job_srvdomcontab', () => {
+    cy.visit('http://186.215.87.174:53080/bareos-webui')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://186.215.87.174:53080/bareos-webui/job/index?jobname=job_srvdomcontab')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_srvdomcontab')
+  })
+
+  it('job_srvdb01', () => {
+    cy.visit('http://186.215.87.174:53080/bareos-webui')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://186.215.87.174:53080/bareos-webui/job/index?jobname=job_srvdb01')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_srvdb01')
+  })
+
+  it('job_srvdomcontab', () => {
+    cy.visit('http://186.215.87.174:53080/bareos-webui')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://186.215.87.174:53080/bareos-webui/job/index?jobname=job_srvdomcontab')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_srvdomcontab')
+  })
+  it('job_srvad01', () => {
+    cy.visit('http://186.215.87.174:53080/bareos-webui')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://186.215.87.174:53080/bareos-webui/job/index?jobname=job_srvad01')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
+    cy.wait(500)
+
+    pegarDados('job_srvad01')
+  })
+
+  it('RestoreFiles', () => {
+    cy.visit('http://186.215.87.174:53080/bareos-webui')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://186.215.87.174:53080/bareos-webui/job/index?jobname=RestoreFiles')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
+    cy.wait(500)
+
+    pegarDados('RestoreFiles')
+  })
+
+  it('backup-bareos-fd', () => {
+    cy.visit('http://186.215.87.174:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://45.6.108.122:58003/bareos-webui/job/index?jobname=backup-bareos-fd')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
+    cy.wait(500)
+
+    pegarDados('backup-bareos-fd')
+
+  })
+
+
+  it('BackupCatalog', () => {
+    cy.visit('http://186.215.87.174:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://186.215.87.174:53080/bareos-webui/job/index?jobname=BackupCatalog')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('BackupCatalog')
+    var dataAtual = new Date()
+    dataAtual = dataAtual.toLocaleDateString().replaceAll('/', '_')
+
+    cy.writeFile('cypress/fixtures/' + 'Real_H_Diario' + dataAtual + '.json', dados)
+
+  })
+
+  function pegarDados(name) {
+    bkpFull = {}
+    bkpFull.title = 'Real_H_Diario' + name
+
+    //Pegar dados último Full
+    cy.get('[data-index="0"] > :nth-child(8)').then(function (e) {
+      const dataEnd = e.text()
+      cy.get('[data-index="0"] > :nth-child(13)').then(function (e) {
+        const success = e.text()
+        if (success == "Success") {
+          //Método responsável por verificar se não há nenhum erro
+          cy.get('[data-index="0"] > :nth-child(12)').then(function (e) {
+            const erros = Number(e.text())
+            bkpFull.errosFull = e.text();
+            if (erros == 0) {
+              cy.get('[data-index="0"] > :nth-child(2)').then(function (e) {
+                const id = e.text()
+                bkpFull.id = id
+              })
+              cy.get('[data-index="0"] > :nth-child(11)').then(function (e) {
+                const tamanhoArquivo = e.text()
+                bkpFull.tamanho = tamanhoArquivo
+              })
+              cy.get('[data-index="0"] > :nth-child(7)').then(function (e) {
+                const dataInicio = e.text()
+                bkpFull.dataInicio = dataInicio
+              })
+              cy.get('[data-index="0"] > :nth-child(8)').then(function (e) {
+                const dataFim = e.text()
+                bkpFull.dataFim = dataFim
+              })
+              bkpFull.full = true
+              bkpFull.notes = "OK"
+            } else {
+              bkpFull.full = false
+              bkpFull.notes = "Erros : " + erros
+            }
+          })
+        } else {
+          bkpFull.full = false
+          bkpFull.notes = success
+        }
+      })
+      dados.push(bkpFull)
+    })
+  }
+})
+
+describe('Real H - Semanal', () => {
+  var dados = []
+  var bkpFull = {}
+
+  it('job_srvdb01', () => {
+    cy.visit('http://186.215.87.174:53081/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://186.215.87.174:53081/bareos-webui/job/index?jobname=job_srvdb01')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_srvdb01')
+  })
+
+  it('job_srvappalbatroz', () => {
+    cy.visit('http://186.215.87.174:53081/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://186.215.87.174:53081/bareos-webui/job/index?jobname=job_srvappalbatroz')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
+    cy.wait(500)
+
+    pegarDados('job_srvappalbatroz')
+  })
+
+  it('job_srvdomcontab', () => {
+    cy.visit('http://186.215.87.174:53081/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://186.215.87.174:53081/bareos-webui/job/index?jobname=job_srvdomcontab')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
+    cy.wait(500)
+
+    pegarDados('job_srvdomcontab')
+  })
+
+  it('job_gestor', () => {
+    cy.visit('http://186.215.87.174:53081/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://186.215.87.174:53081/bareos-webui/job/index?jobname=job_gestor')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
+    cy.wait(500)
+
+    pegarDados('job_gestor')
+  })
+
+  it('job_srvad01', () => {
+    cy.visit('http://186.215.87.174:53081/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://186.215.87.174:53081/bareos-webui/job/index?jobname=job_srvad01')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
+    cy.wait(500)
+
+    pegarDados('job_srvad01')
+  })
+
+  it('backup-bareos-fd', () => {
+    cy.visit('http://186.215.87.174:53081/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://186.215.87.174:53081/bareos-webui/job/index?jobname=backup-bareos-fd')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
+    cy.wait(500)
+
+    pegarDados('backup-bareos-fd')
+
+  })
+
+  it('BackupCatalog', () => {
+    cy.visit('http://186.215.87.174:53081/bareos-webui/dashboard/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://186.215.87.174:53081/bareos-webui/job/index?jobname=BackupCatalog')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('BackupCatalog')
+    var dataAtual = new Date()
+    dataAtual = dataAtual.toLocaleDateString().replaceAll('/', '_')
+
+    cy.writeFile('cypress/fixtures/' + 'RealH-Semanal_' + dataAtual + '.json', dados)
+
+  })
+
+  function pegarDados(name) {
+    bkpFull = {}
+    bkpFull.title = 'Semanal_' + name
+
+    //Pegar dados último Full
+    cy.get('[data-index="0"] > :nth-child(8)').then(function (e) {
+      const dataEnd = e.text()
+      cy.get('[data-index="0"] > :nth-child(13)').then(function (e) {
+        const success = e.text()
+        if (success == "Success") {
+          //Método responsável por verificar se não há nenhum erro
+          cy.get('[data-index="0"] > :nth-child(12)').then(function (e) {
+            const erros = Number(e.text())
+            bkpFull.errosFull = e.text();
+            if (erros == 0) {
+              cy.get('[data-index="0"] > :nth-child(2)').then(function (e) {
+                const id = e.text()
+                bkpFull.id = id
+              })
+              cy.get('[data-index="0"] > :nth-child(11)').then(function (e) {
+                const tamanhoArquivo = e.text()
+                bkpFull.tamanho = tamanhoArquivo
+              })
+              cy.get('[data-index="0"] > :nth-child(7)').then(function (e) {
+                const dataInicio = e.text()
+                bkpFull.dataInicio = dataInicio
+              })
+              cy.get('[data-index="0"] > :nth-child(8)').then(function (e) {
+                const dataFim = e.text()
+                bkpFull.dataFim = dataFim
+              })
+              bkpFull.full = true
+              bkpFull.notes = "OK"
+            } else {
+              bkpFull.full = false
+              bkpFull.notes = "Erros : " + erros
+            }
+          })
+        } else {
+          bkpFull.full = false
+          bkpFull.notes = success
+        }
+      })
+      dados.push(bkpFull)
+    })
+  }
+})
+
+describe('Santa Casa', () => {
+  var dados = []
+  var bkpFull = {}
+
+  it('job_starinfor000080', () => {
+    cy.visit('http://201.88.3.236:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://201.88.3.236:53080/bareos-webui/job/index?jobname=job_starinfor000080')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_starinfor000080')
+  })
+
+  it('job_stainfor10106', () => {
+    cy.visit('http://201.88.3.236:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://201.88.3.236:53080/bareos-webui/job/index?jobname=job_stainfor10106')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_stainfor10106')
+  })
+  it('job_servsat', () => {
+    cy.visit('http://201.88.3.236:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://201.88.3.236:53080/bareos-webui/job/index?jobname=job_servsat')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('job_servsat')
+  })
+
+  it('RestoreFiles', () => {
+    cy.visit('http://201.88.3.236:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://201.88.3.236:53080/bareos-webui/job/index?jobname=RestoreFiles')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('RestoreFiles')
+  })
+
+  it('backup-bareos-fd', () => {
+    cy.visit('http://201.88.3.236:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://201.88.3.236:53081/bareos-webui/job/index?jobname=backup-bareos-fd')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
+    cy.wait(500)
+
+    pegarDados('backup-bareos-fd')
+
+  })
+
+
+  it('BackupCatalog', () => {
+    cy.visit('http://201.88.3.236:53080/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://201.88.3.236:53080/bareos-webui/job/index?jobname=BackupCatalog')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('BackupCatalog')
+    var dataAtual = new Date()
+    dataAtual = dataAtual.toLocaleDateString().replaceAll('/', '_')
+
+    cy.writeFile('cypress/fixtures/' + 'Santa_Casa_' + dataAtual + '.json', dados)
+
+  })
+
+  function pegarDados(name) {
+    bkpFull = {}
+    bkpFull.title = 'Santa_Casa_' + name
+
+    //Pegar dados último Full
+    cy.get('[data-index="0"] > :nth-child(8)').then(function (e) {
+      const dataEnd = e.text()
+      cy.get('[data-index="0"] > :nth-child(13)').then(function (e) {
+        const success = e.text()
+        if (success == "Success") {
+          //Método responsável por verificar se não há nenhum erro
+          cy.get('[data-index="0"] > :nth-child(12)').then(function (e) {
+            const erros = Number(e.text())
+            bkpFull.errosFull = e.text();
+            if (erros == 0) {
+              cy.get('[data-index="0"] > :nth-child(2)').then(function (e) {
+                const id = e.text()
+                bkpFull.id = id
+              })
+              cy.get('[data-index="0"] > :nth-child(11)').then(function (e) {
+                const tamanhoArquivo = e.text()
+                bkpFull.tamanho = tamanhoArquivo
+              })
+              cy.get('[data-index="0"] > :nth-child(7)').then(function (e) {
+                const dataInicio = e.text()
+                bkpFull.dataInicio = dataInicio
+              })
+              cy.get('[data-index="0"] > :nth-child(8)').then(function (e) {
+                const dataFim = e.text()
+                bkpFull.dataFim = dataFim
+              })
+              bkpFull.full = true
+              bkpFull.notes = "OK"
+            } else {
+              bkpFull.full = false
+              bkpFull.notes = "Erros : " + erros
+            }
+          })
+        } else {
+          bkpFull.full = false
+          bkpFull.notes = success
+        }
+      })
+      dados.push(bkpFull)
+    })
+  }
+})
+
+describe('Santa Casa2', () => {
+  var dados = []
+  var bkpFull = {}
+
+  it('job_stainfor00018', () => {
+    cy.visit('http://201.88.3.236:53081/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://201.88.3.236:53081/bareos-webui/job/index?jobname=job_stainfor00018')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
+    cy.wait(500)
+
+    pegarDados('job_stainfor00018')
+  })
+
+  it('RestoreFiles', () => {
+    cy.visit('http://201.88.3.236:53081/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://201.88.3.236:53081/bareos-webui/job/index?jobname=RestoreFiles')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('RestoreFiles')
+  })
+
+  it('backup-bareos-fd', () => {
+    cy.visit('http://201.88.3.236:53081/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://201.88.3.236:53081/bareos-webui/job/index?jobname=backup-bareos-fd')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
+    cy.wait(500)
+
+    pegarDados('backup-bareos-fd')
+
+  })
+
+
+  it('BackupCatalog', () => {
+    cy.visit('http://201.88.3.236:53081/bareos-webui/')
+    cy.get('input[name="consolename"]').type('admin')
+    cy.get('input[name="password"]').type('ViQUingue')
+    cy.contains('Login').click()
+
+    cy.visit('http://201.88.3.236:53081/bareos-webui/job/index?jobname=BackupCatalog')
+
+    cy.get('[placeholder="Level"]').type('full')
+    cy.wait(500)
+
+    pegarDados('BackupCatalog')
+    var dataAtual = new Date()
+    dataAtual = dataAtual.toLocaleDateString().replaceAll('/', '_')
+
+    cy.writeFile('cypress/fixtures/' + 'Santa_Casa2_' + dataAtual + '.json', dados)
+
+  })
+
+  function pegarDados(name) {
+    bkpFull = {}
+    bkpFull.title = 'Santa_Casa_' + name
+
+    //Pegar dados último Full
+    cy.get('[data-index="0"] > :nth-child(8)').then(function (e) {
+      const dataEnd = e.text()
+      cy.get('[data-index="0"] > :nth-child(13)').then(function (e) {
+        const success = e.text()
+        if (success == "Success") {
+          //Método responsável por verificar se não há nenhum erro
+          cy.get('[data-index="0"] > :nth-child(12)').then(function (e) {
+            const erros = Number(e.text())
+            bkpFull.errosFull = e.text();
+            if (erros == 0) {
+              cy.get('[data-index="0"] > :nth-child(2)').then(function (e) {
+                const id = e.text()
+                bkpFull.id = id
+              })
+              cy.get('[data-index="0"] > :nth-child(11)').then(function (e) {
+                const tamanhoArquivo = e.text()
+                bkpFull.tamanho = tamanhoArquivo
+              })
+              cy.get('[data-index="0"] > :nth-child(7)').then(function (e) {
+                const dataInicio = e.text()
+                bkpFull.dataInicio = dataInicio
+              })
+              cy.get('[data-index="0"] > :nth-child(8)').then(function (e) {
+                const dataFim = e.text()
+                bkpFull.dataFim = dataFim
+              })
+              bkpFull.full = true
+              bkpFull.notes = "OK"
+            } else {
+              bkpFull.full = false
+              bkpFull.notes = "Erros : " + erros
+            }
+          })
+        } else {
+          bkpFull.full = false
+          bkpFull.notes = success
+        }
+      })
+      dados.push(bkpFull)
+    })
+  }
+})
