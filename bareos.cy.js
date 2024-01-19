@@ -421,24 +421,6 @@ describe('AgricolaPanorama', () => {
 
   })
 
-  it('RestoreFiles', () => {
-    cy.visit('http://179.48.245.22:53080/bareos-webui/')
-    cy.get('input[name="consolename"]').type('admin')
-    cy.get('input[name="password"]').type('ViQUingue')
-    cy.contains('Login').click()
-
-    cy.visit('http://179.48.245.22:53080/bareos-webui/job/index?jobname=RestoreFiles')
-
-    cy.get('[placeholder="Level"]').type('full')
-    cy.get('[style="left: 36%;"]').click()
-    cy.wait(500)
-
-    pegarDados('RestoreFiles')
-
-  })
-
-
-
   it('backup-bareos-fd', () => {
     cy.visit('http://179.48.245.22:53080/bareos-webui/')
     cy.get('input[name="consolename"]').type('admin')
@@ -601,9 +583,6 @@ describe('Discautol', () => {
   })
 
 
-
-
-
   it('backup-bareos-fd', () => {
     cy.visit('http://179.185.91.250:53080/bareos-webui/')
     cy.get('input[name="consolename"]').type('admin')
@@ -613,6 +592,7 @@ describe('Discautol', () => {
     cy.visit('http://179.185.91.250:53080/bareos-webui/job/index?jobname=backup-bareos-fd')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('backup-bareos-fd')
@@ -732,6 +712,7 @@ describe('GraficaPex-Bancos', () => {
     cy.visit('http://177.174.43.235:53081/bareos-webui/job/index?jobname=backup-bareos-fd')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('backup-bareos-fd')
@@ -1133,22 +1114,6 @@ describe('Lxtec_(Data_Center)', () => {
     pegarDados('job_srvdb_carbodo')
 
   })
-
-  it('RestoreFiles', () => {
-    cy.visit('http://172.16.0.11/bareos-webui/')
-    cy.get('input[name="consolename"]').type('admin')
-    cy.get('input[name="password"]').type('ViQUingue')
-    cy.contains('Login').click()
-
-    cy.visit('http://172.16.0.11/bareos-webui/job/index?jobname=RestoreFiles')
-
-    cy.get('[placeholder="Level"]').type('full')
-    cy.wait(500)
-
-    pegarDados('RestoreFiles')
-
-  })
-
 
   it('backup-bareos-fd', () => {
     cy.visit('http://172.16.0.11/bareos-webui/')
@@ -1561,6 +1526,7 @@ describe('Lxtec (Contabo)', () => {
     cy.visit('http://173.249.27.152/bareos-webui/job/index?jobname=job_vmi1301197')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('job_vmi1301197')
@@ -1580,21 +1546,6 @@ describe('Lxtec (Contabo)', () => {
     cy.wait(500)
 
     pegarDados('Consolidate')
-
-  })
-
-  it('CopyLongtermFull', () => {
-    cy.visit('http://173.249.27.152/bareos-webui/')
-    cy.get('input[name="consolename"]').type('admin')
-    cy.get('input[name="password"]').type('ViQUingue')
-    cy.contains('Login').click()
-
-    cy.visit('http://173.249.27.152/bareos-webui/job/index?jobname=CopyLongtermFull')
-
-    cy.get('[placeholder="Level"]').type('full')
-    cy.wait(500)
-
-    pegarDados('CopyLongtermFull')
 
   })
 
@@ -1916,6 +1867,7 @@ describe('Prefeitura Municipal de Corumba', () => {
     cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/job/index?jobname=job_sarqpmc01')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('job_sarqpmc01')
@@ -1958,24 +1910,10 @@ describe('Prefeitura Municipal de Corumba', () => {
     cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/job/index?jobname=job_ns4')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('job_ns4')
-
-  })
-
-  it('RestoreFiles', () => {
-    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/')
-    cy.get('input[name="consolename"]').type('admin')
-    cy.get('input[name="password"]').type('ViQUingue')
-    cy.contains('Login').click()
-
-    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/job/index?jobname=RestoreFiles')
-
-    cy.get('[placeholder="Level"]').type('full')
-    cy.wait(500)
-
-    pegarDados('RestoreFiles')
 
   })
 
@@ -1988,6 +1926,7 @@ describe('Prefeitura Municipal de Corumba', () => {
     cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/job/index?jobname=backup-bareos-fd')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('backup-bareos-fd')
@@ -2000,7 +1939,7 @@ describe('Prefeitura Municipal de Corumba', () => {
     cy.get('input[name="password"]').type('ViQUingue')
     cy.contains('Login').click()
 
-    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui /job/index?jobname=BackupCatalog')
+    cy.visit('http://sis.corumba.ms.gov.br:53080/bareos-webui/job/index?jobname=BackupCatalog')
 
     cy.get('[placeholder="Level"]').type('full')
     cy.wait(500)
@@ -2088,6 +2027,7 @@ describe('Prefeitura Municipal de Ladario', () => {
     cy.visit('http://186.211.159.202:53080/bareos-webui/job/index?jobname=backup-bareos-fd')
 
     cy.get('[placeholder="Level"]').type('full')
+    cy.get('[style="left: 26%;"]').click()
     cy.wait(500)
 
     pegarDados('backup-bareos-fd')
@@ -2296,20 +2236,6 @@ describe('Real H - Diario', () => {
     pegarDados('job_srvappalbatroz')
   })
 
-  it('job_srvdomcontab', () => {
-    cy.visit('http://186.215.87.174:53080/bareos-webui')
-    cy.get('input[name="consolename"]').type('admin')
-    cy.get('input[name="password"]').type('ViQUingue')
-    cy.contains('Login').click()
-
-    cy.visit('http://186.215.87.174:53080/bareos-webui/job/index?jobname=job_srvdomcontab')
-
-    cy.get('[placeholder="Level"]').type('full')
-    cy.wait(500)
-
-    pegarDados('job_srvdomcontab')
-  })
-
   it('job_srvdb01', () => {
     cy.visit('http://186.215.87.174:53080/bareos-webui')
     cy.get('input[name="consolename"]').type('admin')
@@ -2337,6 +2263,7 @@ describe('Real H - Diario', () => {
 
     pegarDados('job_srvdomcontab')
   })
+
   it('job_srvad01', () => {
     cy.visit('http://186.215.87.174:53080/bareos-webui')
     cy.get('input[name="consolename"]').type('admin')
@@ -2350,21 +2277,6 @@ describe('Real H - Diario', () => {
     cy.wait(500)
 
     pegarDados('job_srvad01')
-  })
-
-  it('RestoreFiles', () => {
-    cy.visit('http://186.215.87.174:53080/bareos-webui')
-    cy.get('input[name="consolename"]').type('admin')
-    cy.get('input[name="password"]').type('ViQUingue')
-    cy.contains('Login').click()
-
-    cy.visit('http://186.215.87.174:53080/bareos-webui/job/index?jobname=RestoreFiles')
-
-    cy.get('[placeholder="Level"]').type('full')
-    cy.get('[style="left: 26%;"]').click()
-    cy.wait(500)
-
-    pegarDados('RestoreFiles')
   })
 
   it('backup-bareos-fd', () => {
@@ -2657,20 +2569,6 @@ describe('Santa Casa', () => {
     pegarDados('job_servsat')
   })
 
-  it('RestoreFiles', () => {
-    cy.visit('http://201.88.3.236:53080/bareos-webui/')
-    cy.get('input[name="consolename"]').type('admin')
-    cy.get('input[name="password"]').type('ViQUingue')
-    cy.contains('Login').click()
-
-    cy.visit('http://201.88.3.236:53080/bareos-webui/job/index?jobname=RestoreFiles')
-
-    cy.get('[placeholder="Level"]').type('full')
-    cy.wait(500)
-
-    pegarDados('RestoreFiles')
-  })
-
   it('backup-bareos-fd', () => {
     cy.visit('http://201.88.3.236:53080/bareos-webui/')
     cy.get('input[name="consolename"]').type('admin')
@@ -2774,20 +2672,6 @@ describe('Santa Casa2', () => {
     pegarDados('job_stainfor00018')
   })
 
-  it('RestoreFiles', () => {
-    cy.visit('http://201.88.3.236:53081/bareos-webui/')
-    cy.get('input[name="consolename"]').type('admin')
-    cy.get('input[name="password"]').type('ViQUingue')
-    cy.contains('Login').click()
-
-    cy.visit('http://201.88.3.236:53081/bareos-webui/job/index?jobname=RestoreFiles')
-
-    cy.get('[placeholder="Level"]').type('full')
-    cy.wait(500)
-
-    pegarDados('RestoreFiles')
-  })
-
   it('backup-bareos-fd', () => {
     cy.visit('http://201.88.3.236:53081/bareos-webui/')
     cy.get('input[name="consolename"]').type('admin')
@@ -2803,7 +2687,6 @@ describe('Santa Casa2', () => {
     pegarDados('backup-bareos-fd')
 
   })
-
 
   it('BackupCatalog', () => {
     cy.visit('http://201.88.3.236:53081/bareos-webui/')
